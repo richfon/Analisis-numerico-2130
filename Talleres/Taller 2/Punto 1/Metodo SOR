@@ -1,0 +1,54 @@
+import numpy as np
+
+def sor_solver(A, b, omega, initial_guess, convergence_criteria,T,k):
+ 
+  count = 0
+  phi = initial_guess[:]
+  residual = np.linalg.norm(np.matmul(A, phi) - b) 
+      
+  while residual > convergence_criteria and count<=k:
+        for i in range(A.shape[0]):
+          sigma = 0
+          for j in range(A.shape[1]):
+            if j != i:
+              sigma += A[i][j] * phi[j]
+              T[i][j] = sigma
+          phi[i] = (1 - omega) * phi[i] + (omega / A[i][i]) * (b[i] - sigma)
+          
+        print('Iteración:{0}'.format(count))
+        print(T)
+        residual = np.linalg.norm(np.matmul(A, phi) - b)
+        print('{0}'.format(phi))
+        print('Error: {0:10.9g}\n'.format(residual))
+        count+=1
+         
+  return phi
+
+
+
+
+residual_convergence = 1e-16
+omega = 1.06 
+
+A = np.ones((3, 3))
+A[0][0] = 3
+A[0][1] = -1
+A[0][2] = 1
+
+A[1][0] = 1
+A[1][1] = -8
+A[1][2] = -2
+
+A[2][0] = 1
+A[2][1] = 1
+A[2][2] = 5
+
+b = np.ones(3)
+b[0] = 1
+b[1] = 4
+b[2] = -2
+
+initial_guess = np.zeros(3)
+T = np.ones((3,3))
+phi = sor_solver(A, b, omega, initial_guess, residual_convergence,T,50)
+print(phi)

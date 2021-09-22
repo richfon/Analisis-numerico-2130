@@ -1,0 +1,73 @@
+import numpy as np
+
+def digdom():
+    A = ([[1,-8,-2],[1,1,5],[3,-1,1]])
+    B = ([[1],[4],[-2]])
+    es=True
+    
+    aux=0
+    sum0=0
+    sum1=0
+    sum2=0
+    for i in range(0,3):
+        for j in range(0,3):
+            if(i==j):
+             aux = abs(A[i][j])  
+            if(i==0 and i!=j):
+                sum0=sum0+A[i][j]
+            if(i==1 and i!=j):
+                sum1=sum1+A[i][j]
+            if(i==2 and i!=j):
+                sum2=sum2+A[i][j]
+        if(i==0):
+            if(aux<abs(sum0)):
+                es=False
+        if(i==1):
+            if(aux<abs(sum1)):
+                es=False
+        if(i==2):
+            if(aux<abs(sum2)):
+                es=False  
+                
+    if(es==True):
+        print("es diagonal dominante")
+    else:
+        print("no es diagonal dominante")
+def digdom2():
+    A = ([[3,-1,1],[1,-8,-2],[1,1,5]])
+    B = ([[-2],[1],[4]])
+    es=True
+    
+    aux=0
+    sum0=0
+    sum1=0
+    sum2=0
+    for i in range(0,3):
+        for j in range(0,3):
+            if(i==j):
+             aux = abs(A[i][j])  
+            if(i==0 and i!=j):
+                sum0=sum0+A[i][j]
+            if(i==1 and i!=j):
+                sum1=sum1+A[i][j]
+            if(i==2 and i!=j):
+                sum2=sum2+A[i][j]
+        if(i==0):
+            if(aux<abs(sum0)):
+                es=False
+        if(i==1):
+            if(aux<abs(sum1)):
+                es=False
+        if(i==2):
+            if(aux<abs(sum2)):
+                es=False  
+                
+    if(es==True):
+        print("es diagonal dominante")
+    else:
+        print("no es diagonal dominante")
+        
+print("Matriz original:")        
+digdom()
+print("Matriz intercambiando filas:")
+digdom2()
